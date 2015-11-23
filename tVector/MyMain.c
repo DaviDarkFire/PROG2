@@ -85,5 +85,7 @@ int main(void)
 	
 	print(V);
 	destroy(V);
+	
+	
 	return 0;
 }
