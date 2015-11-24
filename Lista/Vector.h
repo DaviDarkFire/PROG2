@@ -41,3 +41,8 @@ int maxSorted (tVector*);			// retorna o maior elemento do vetor ordenado
 int min (tVector*);				// retorna o menor elemento do vetor
 int minRec (tVector*, int);			// retorna o menor elemento do vetor (recursivo)
 int minSorted (tVector*);			// retorna o menor elemento do vetor ordenado
+void bubble_sort (tVector*);		//ADVINHA, essa função ordena o vetor pelo método bubble sort
+void bubbleSortRecursive (tVector*, int, int); //idem o de cima, só que agora é recursivo
+void bubbleSortRec(tVector*);	 	//interface da bubble sort recursiva
+
+
