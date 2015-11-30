@@ -4,10 +4,12 @@
 
 
 int buscaBinariaRecursiva(tVector *V, int esquerda, int direita, int x){
-	int m;
-	m = (V->numberOfElements-1)/2;
+	int m = (esquerda+direita)/2;
 
-	if(esquerda == direita-1) return direita;
+	 // printf("%d\n", m);
+
+	if(esquerda == direita-1) return direita+1;
+	else if(esquerda == direita-1 && )return -1;
 
 	if(x > V->data[m]){
 		return buscaBinariaRecursiva(V, m, direita, x);
@@ -16,6 +18,7 @@ int buscaBinariaRecursiva(tVector *V, int esquerda, int direita, int x){
 }
 
 void buscaBinariaRecursivaInterface(tVector *V, int x){
+
 	printf("%d\n", buscaBinariaRecursiva(V, 0, V->numberOfElements-1, x));
 }
 
