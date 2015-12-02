@@ -71,6 +71,28 @@ void insertion_sort(int n, int v[MAX]){
 		}
 		v[j+1] = x; //essa pemba funciona
 	}
+}
+void merge(int v[MAX], int left, int right, int mediana){
+	int *w = malloc((right-left) * sizeof(int));
+	while(){
+
+
+
+
+
+	}
+
+
+}
+void merge_sort(int v[MAX], int left, int right){
+	if(left < right-1){
+		int mediana = (left+right)/2;
+		merge_sort(v, left, mediana);
+		merge_sort(v, mediana, right);
+		merge(v, left, right, mediana);
+
+	}
+
 
 
 }
@@ -97,15 +119,5 @@ int main(void){
 
 	}
 	printf("\n");
-
-
-
-
-
-
-
-
-
-
 	return 0;
 }
