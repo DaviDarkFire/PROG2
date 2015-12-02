@@ -23,7 +23,7 @@ int bubble_sort_rec(int n, int v[MAX]){
 
 	for(int j = 0; j < n; j++){ //começa de zero e vai até o n
 		if(v[j] >= v[j+1]){ //compara de a posição em que o contador está atualmente é maior que a próxima
-			sort(&v[j], &v[j+1]); //se for maior ele usa o método sort pra trocar os valores das posições	
+			sort(&v[j], &v[j+1]); //se for maior ele usa o método sort pra trocar os valores das posições
 		}
 	}
 
@@ -48,7 +48,8 @@ void selection_sort(int n, int v[MAX]){
 	}
 }
 
-int selection_sort_rec(int n, int v[MAX]){
+int selection_sort_rec(int i, int n, int v[MAX]){
+	int min = i;
 	for(int j = i+1; j < n; j++){ //vai começar da posição i+1 e vai até a última posição do vetor
 		if(v[min] > v[j]){ // ve se o valor do vetor na posição que foi tomada como menor é menor que o valor da posição atual
 			min = j; // se for maior o ´indice do valor mínimo recebe o índice do verdadeiro valor mínimo
@@ -57,11 +58,8 @@ int selection_sort_rec(int n, int v[MAX]){
 	sort(&v[min], &v[i]); // no final do laço interno quando descobriu o verdadeiro valor mínimo em relação ao primeiro que foi tomado
 	// faz a troca de posição
 
-	//if()
-
-
-
-
+	if(i == n-2) return 0;
+	return selection_sort_rec(i+1, n, v);
 }
 
 void insertion_sort(int n, int v[MAX]){
@@ -93,7 +91,7 @@ int main(void){
 	}
 	printf("\n");
 
-	selection_sort(n, v);
+	selection_sort_rec(0, n, v);
 	for(int i = 0; i < n; i++){
 		printf("%d ", v[i]);
 
