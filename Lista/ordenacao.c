@@ -72,24 +72,31 @@ void insertion_sort(int n, int v[MAX]){
 		v[j+1] = x; //essa pemba funciona
 	}
 }
-void merge(int v[MAX], int left, int right, int mediana){
-	int *w = malloc((right-left) * sizeof(int));
-	while(){
+void merge(int p, int q, int r, int v[MAX]) 
+{
+   int i, j, k, *w;
+   w = malloc ((r-p) * sizeof (int));
+   i = p; 
+   j = q;
+   k = 0;
 
-
-
-
-
-	}
-
-
+   while (i < q && j < r) {
+      if (v[i] <= v[j])  w[k++] = v[i++];
+      else  w[k++] = v[j++];
+   }
+   while (i < q)  w[k++] = v[i++];
+   while (j < r)  w[k++] = v[j++];
+   for (i = p; i < r; ++i)  v[i] = w[i-p];
+   free (w);
 }
+
+
 void merge_sort(int v[MAX], int left, int right){
 	if(left < right-1){
 		int mediana = (left+right)/2;
 		merge_sort(v, left, mediana);
 		merge_sort(v, mediana, right);
-		merge(v, left, right, mediana);
+		merge(left, mediana, right, v);
 
 	}
 
@@ -103,17 +110,28 @@ int main(void){
 	int *v = malloc(n * sizeof(int));
 	srand(time(NULL));
 
+	// for(int i = 0; i < n; i++){
+	// 	v[i] = rand()%n;
+
+	// }
+
 	for(int i = 0; i < n; i++){
-		v[i] = rand()%n;
+		if(i <= 5){
+			v[i] = 5+i;
+		}else{
+			v[i] = (5-i)*-1;
+		}
+
 
 	}
+
 	for(int i = 0; i < n; i++){
 		printf("%d ", v[i]);
 
 	}
 	printf("\n");
 
-	selection_sort_rec(0, n, v);
+	merge_sort(v, 0, n);
 	for(int i = 0; i < n; i++){
 		printf("%d ", v[i]);
 
