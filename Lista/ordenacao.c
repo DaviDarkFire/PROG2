@@ -72,23 +72,28 @@ void insertion_sort(int n, int v[MAX]){
 		v[j+1] = x; //essa pemba funciona
 	}
 }
-void merge(int p, int q, int r, int v[MAX]) 
-{
-   int i, j, k, *w;
-   w = malloc ((r-p) * sizeof (int));
-   i = p; 
-   j = q;
-   k = 0;
+void merge(int inicio, int meio, int fim, int v[MAX]){
+	int i, j, k = 0;
 
-   while (i < q && j < r) {
-      if (v[i] <= v[j])  w[k++] = v[i++];
-      else  w[k++] = v[j++];
-   }
-   while (i < q)  w[k++] = v[i++];
-   while (j < r)  w[k++] = v[j++];
-   for (i = p; i < r; ++i)  v[i] = w[i-p];
-   free (w);
+	i = inicio;
+	j = meio;
+
+	int *w = malloc((fim - inicio) * sizeof(int));
+
+	while(i < meio && j < fim){
+		if(v[i] < v[j]) w[k++] = v[i++];
+		else w[k++] = v[j++];
+	}
+
+	while(i < meio) w[k++] = v[i++];
+	while(j < fim) w[k++] = v[j++];
+
+	for(int cont = inicio; cont < fim; cont++){
+		v[cont] = w[cont-inicio];
+	}
+	free(w);	
 }
+
 
 
 void merge_sort(int v[MAX], int left, int right){
@@ -110,20 +115,11 @@ int main(void){
 	int *v = malloc(n * sizeof(int));
 	srand(time(NULL));
 
-	// for(int i = 0; i < n; i++){
-	// 	v[i] = rand()%n;
-
-	// }
-
 	for(int i = 0; i < n; i++){
-		if(i <= 5){
-			v[i] = 5+i;
-		}else{
-			v[i] = (5-i)*-1;
-		}
-
+		v[i] = rand()%n;
 
 	}
+	
 
 	for(int i = 0; i < n; i++){
 		printf("%d ", v[i]);
