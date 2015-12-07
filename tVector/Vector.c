@@ -41,6 +41,20 @@ void add (tVector* V, int el)
 	(V->numberOfElements)++;
 }
 
+void addAtPosition(tVector* V, int el, int pos){
+	int i;
+
+	//O(n)
+	for(i = V->numberOfElements; i > pos; i--){
+		V->data[i] = V->data[i-1];		
+	}
+
+	//O(1)
+	V->data[pos] = el;
+	(V->numberOfElements)++;
+
+}
+
 
 // inserção do elemento passado como parâmetro no inicio do vetor
 // Complexidade: O(n), pois precisa rearranjar os elementos antes de inserir o novo elemento na posicao 0
@@ -403,18 +417,43 @@ void bubbleSortRecursive (tVector* V, int i, int trocou){
 	V->data[j] = V->data[j+1];
 	V->data[j+1] = temp;
 	trocou = 1;
-    }	
-    
-  }
-  
-  bubbleSortRecursive(V, i-1, trocou);
-    
-  
-  
-  
-  
+    }	   
+  }  
+  bubbleSortRecursive(V, i-1, trocou); 
 }
 
+void mergeSort(tVector* V, int p, int r){
+	int q = (p+r)/2;
+	if(p < r-1){
+		mergeSort(V, p, q);
+		mergeSort(V, q, r);
+		merge(V, p, q, r);
+	}
+
+}
+
+void merge(tVector* v, int p, int q , int r){
+	int i, j, k = 0;
+	tVector *w;
+	w = create(r-p);
+	i = p;
+	j = q;
+
+	while(i < q && j < r){
+		if(v->data[i] < v->data[j]) w->data[k++] = v->data[i++];
+		else w->data[k++] = v->data[j++];
+	}
+
+	while(i < q) w->data[k++] = v->data[i++];
+	while(j < r) w->data[k++] = v->data[j++];	
+
+	for(int l = p; l < r; l++){
+		v->data[l] = w->data[l-p];
+	}
+
+	destroy(w);
+}
+	
 
 
 

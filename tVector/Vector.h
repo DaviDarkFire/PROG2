@@ -44,5 +44,8 @@ int minSorted (tVector*);			// retorna o menor elemento do vetor ordenado
 void bubble_sort (tVector*);		//ADVINHA, essa função ordena o vetor pelo método bubble sort
 void bubbleSortRecursive (tVector*, int, int); //idem o de cima, só que agora é recursivo
 void bubbleSortRec(tVector*);	 	//interface da bubble sort recursiva
+void mergeSort (tVector*, int, int);//ordena um vetor recursivamente, utilizando divisão e conquista. Método de ordenação por intercalação.
+void merge (tVector*, int, int, int);//realiza a intercalação de dois subvetores (partes de V) já ordenadas e devolve os elementos intercalados para o vetor original
+
 
 
