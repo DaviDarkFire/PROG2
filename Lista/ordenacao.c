@@ -91,10 +91,8 @@ void merge(int inicio, int meio, int fim, int v[MAX]){
 	for(int cont = inicio; cont < fim; cont++){
 		v[cont] = w[cont-inicio];
 	}
-	free(w);	
+	free(w);
 }
-
-
 
 void merge_sort(int v[MAX], int left, int right){
 	if(left < right-1){
@@ -119,7 +117,7 @@ int main(void){
 		v[i] = rand()%n;
 
 	}
-	
+
 
 	for(int i = 0; i < n; i++){
 		printf("%d ", v[i]);
