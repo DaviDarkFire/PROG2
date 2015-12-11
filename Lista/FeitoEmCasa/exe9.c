@@ -64,15 +64,14 @@ void quickSort(MySet *s, int p, int r){
 
 //ESTUDAR BUSCA BINÁRIA
 int buscaBinaria(MySet *s, int inicio, int fim, int el){
-
-    if(fim < inicio) return -1; //condição de parada pra se não encontrou elementos
-
-    if(inicio == fim-1) return fim; //condição de parada pra se encontrou elementos
+    if(fim < inicio) return -1;
+    if(inicio == fim-1) return fim;
     else{
-      int meio = (inicio+fim)/2; // a partir daqui vc ja sabe como funfa
-      if(el > s->data[meio]) return buscaBinaria(s, meio, fim, el);
+      int meio = (inicio+fim)/2;
+      if(s->data[meio] < el) return buscaBinaria(s, meio, fim, el);
       else return buscaBinaria(s, inicio, meio, el);
     }
+
 }
 int temSoma(MySet *s, int x){
     int res;

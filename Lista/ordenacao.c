@@ -100,7 +100,6 @@ void merge_sort(int v[MAX], int left, int right){
 		merge_sort(v, left, mediana);
 		merge_sort(v, mediana, right);
 		merge(left, mediana, right, v);
-
 	}
 
 
