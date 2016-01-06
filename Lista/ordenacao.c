@@ -57,7 +57,6 @@ int selection_sort_rec(int i, int n, int v[MAX]){
 	}
 	sort(&v[min], &v[i]); // no final do laço interno quando descobriu o verdadeiro valor mínimo em relação ao primeiro que foi tomado
 	// faz a troca de posição
-
 	if(i == n-2) return 0;
 	return selection_sort_rec(i+1, n, v);
 }
