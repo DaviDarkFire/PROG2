@@ -51,19 +51,52 @@ int verifica_area(int matriz[LC][LC], int n, int linha, int coluna){
 //a seguinte função verifica se um número pode ser colocado em determinada posição 
 //analisando a área , a coluna e a linha
 int pode_preencher(int matriz[LC][LC], int n, int linha, int coluna){
-	if(verifica_area(matriz, n, linha, coluna) && verifica_coluna_e_linha(matriz, n, linha coluna))
+	if(verifica_area(matriz, n, linha, coluna) && verifica_coluna_e_linha(matriz, n, linha, coluna))
 		return 1;
 	else
 		return 0;
 }
+//a seguinte função verifica se a matriz está totalmente preenchida
+int verifica_matriz(int matriz[LC][LC]){
+	for(int i = 0; i < LC; i++){
+		for(int j = 0; j < LC; j ++){
+			if(matriz[i][j] == 0)
+				return 0;
+		}
+	}
+	return 1;
+
+}
 
 //a seguinte função recebe a matriz com os números e resove o jogo
-int resolve_jogo(matriz[LC][LC], n){
-	
+int resolve_jogo(int matriz[LC][LC], int n, int linha, int coluna){
+	if(verifica_matriz(matriz))
+		return 1;
 
+	for(int i = n; i <= LC; i++){
+		if(coluna > 8){
+			coluna = 0;
+			linha++;
+		}
+		if(linha > 8){
+			return 1;
+		}
+		if(matriz[linha][coluna] == 0){
+			if(pode_preencher(matriz, i, linha, coluna)){
+      				matriz[linha][coluna] = i;
+				coluna++;
+			}
 
+			if(i == 9 && !pode_preencher(matriz, i, linha, coluna)){
+				if(coluna == 0)
+					linha--;
+				else
+					coluna--;
+				return resolve_jogo(matriz, matriz[linha][coluna]+1, linha, coluna);
+			}
+		}
 
-
+	}
 
 }
 
@@ -71,6 +104,8 @@ int resolve_jogo(matriz[LC][LC], n){
 int main(void){
     int matriz[LC][LC]; //cria a matriz
     le_jogo(matriz);
+    imprime_jogo(matriz);
+    printf("%d", resolve_jogo(matriz, 1, 0, 0));
     imprime_jogo(matriz);
 
   return 0;
