@@ -102,6 +102,7 @@ int resolve_sudoku(int matriz[LC][LC])
 	//se o return for zero, a função recursiva continua
     return 0;
 }
+
 int main(void){
     int matriz[LC][LC]; //cria a matriz
     le_jogo(matriz); //le o jogo
