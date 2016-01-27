@@ -1,6 +1,6 @@
 #include <stdio.h> //inclui as funções de entrada e saída básicos necessários para o desenvolvimento deste trabalho
 #include <math.h>  //inclui funções matemáticas necessárias no desenvolvimento deste software
-#define LC 9 //define o tamanho de linha e coluna
+#define LC 9 //define o tamanho da matriz, pra um jogo 16x16 alterar o valor 9 por 16
 
 //imprime a matriz
 void imprime_jogo(int matriz[LC][LC]){
@@ -103,13 +103,15 @@ int resolve_sudoku(int matriz[LC][LC])
     return 0;
 }
 
-int main(void){
+int main(void){    
     int matriz[LC][LC]; //cria a matriz
     le_jogo(matriz); //le o jogo
     imprime_jogo(matriz); //imprime a matriz passada
     int aux = resolve_sudoku(matriz); //resolve a função putona
-    aux = aux;
-    imprime_jogo(matriz); //imprime a matriz passada
+    if(aux)
+	    imprime_jogo(matriz); //imprime a matriz passada
+    else
+	    printf("Matriz sem solução\n");
     return 0;
 }
 
