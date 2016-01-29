@@ -1,6 +1,6 @@
 #include <stdio.h> //inclui as funções de entrada e saída básicos necessários para o desenvolvimento deste trabalho
 #include <math.h>  //inclui funções matemáticas necessárias no desenvolvimento deste software
-#define LC 9 //define o tamanho da matriz
+#define LC 9 //define o tamanho da matriz, pra um jogo 16x16 alterar o valor 9 por 16
 
 //imprime a matriz
 void imprime_jogo(int matriz[LC][LC]){
@@ -35,7 +35,7 @@ int verifica_coluna_e_linha(int matriz[LC][LC], int n, int linha, int coluna){
 //verifica se determinado número existe em uma área
 //retorna 0 se existir, e 1 se não existir
 int verifica_area(int matriz[LC][LC], int n, int linha, int coluna){
-	int aux = sqrt(LC); 
+	int aux = sqrt(LC);
 	// nas próximas 2 linhas, a variável linha e a variável coluna recebem a conta que faz identificar qual a área que os valores passados estão
 	linha = linha-linha%aux;
 	coluna = coluna-coluna%aux;
@@ -74,8 +74,17 @@ int verifica_matriz(int matriz[LC][LC], int *linha, int *coluna){
 	return 0;
 
 }
+void copiar(int matriz[LC][LC], int copia[LC][LC]){
+	for(int i = 0; i < LC; i++){
+		for(int j = 0; j < LC; j++){
+			copia[i][j] = matriz[i][j];
+
+		}
+	}
+}
+
 //a seguinte função recebe a matriz com os números e resove o jogo
-int resolve_sudoku(int matriz[LC][LC])
+int resolve_sudoku(int matriz[LC][LC], int copia[LC][LC] , int *cont)
 {
     int coluna, linha;
 	//o if a seguir verifica se a matriz está totalmente preenchida, se estiver retorna 1
@@ -90,28 +99,36 @@ int resolve_sudoku(int matriz[LC][LC])
         {
 		//a matriz recebe o número testado na função chamada no if acima
             matriz[linha][coluna] = num;
-		//o if a seguir faz a chamada recursiva da função e retorna 1 se a próxima posição for preenchida
-            if (resolve_sudoku(matriz))
-                return 1;
-	    else
-		//se a próxima posição não for preenchida, isso significa que o valor colocado na posição atual não é bom
-		//desse a próxima linha faz essa posição ficar em branco novamente para que ela possa ser testada no pŕoximo loop do for
-                matriz[linha][coluna] = 0;
+			//o if a seguir faz a chamada recursiva da função e retorna 1 se a próxima posição for preenchida
+	        if (resolve_sudoku(matriz, copia, cont))
+		    {
+		        (*cont)++; //conta uma possibilidade de resolução
+		         copiar(matriz, copia); //faz uma copia da resolução pra matriz copia
+	               matriz[linha][coluna] = 0; //retorna a posição igual a zero pra testar as outras possibilidades
+
+		    }
+		    else
+		    {
+			//se a próxima posição não for preenchida, isso significa que o valor colocado na posição atual não é bom
+			//desse a próxima linha faz essa posição ficar em branco novamente para que ela possa ser testada no pŕoximo loop do for
+	                matriz[linha][coluna] = 0;
+	        }
         }
     }
 	//se o return for zero, a função recursiva continua
     return 0;
 }
 
-int main(void){    
+int main(void){
+    int cont = 0; //cria um contador pras armazenar as soluções do sudoku
+    int copia[LC][LC]; //cria uma matriz que vai servir pra armazenar o jogo resolvido,
+    // visto que a outra matriz vai servir pra contar as possibilidades de resolução
     int matriz[LC][LC]; //cria a matriz
     le_jogo(matriz); //le o jogo
-    imprime_jogo(matriz); //imprime a matriz passada
-    int aux = resolve_sudoku(matriz); //resolve a função putona
-    if(aux)
-	    imprime_jogo(matriz); //imprime a matriz passada
-    else
-	    printf("Matriz sem solução\n");
+    resolve_sudoku(matriz, copia, &cont); //resolve o jogo
+    if(cont){
+    	printf("Este jogo possui %2d soluções(ção).\n", cont);
+    }
+    imprime_jogo(copia); //imprime a matriz passada
     return 0;
 }
-
