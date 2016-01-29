@@ -39,6 +39,8 @@ MyHeap* create (int capacity)
 
 	heap->numberOfElements = 0;
 	heap->capacity = capacity;
+
+	return heap;
 }
 
 
@@ -104,7 +106,16 @@ relação aos seus descendentes
 *************************************************************************/
 void down (MyHeap* heap, int i)
 {
-			// INSERIRI CODIGO
+			if(i >= heap->numberOfElements)
+				return;
+
+			int maior = max(heap, i);
+
+			if(i != maior){
+				exchange (heap, i, maior);
+				down (heap, maior);
+				return;
+			}	
 }
 
 /************************************************************************ 
@@ -187,16 +198,19 @@ Função para retornar o elemento de maior prioridade no Heap, garantindo
 a manutenção da ordem entre os elementos após a remoção
 *************************************************************************/
 tElement remove_max (MyHeap* heap)
-{
+{	
 	if (heap->numberOfElements == 0) exception (UNDERFLOW_WARNING);
 	else
 	{
-		// INSERIRI CODIGO		
-
-
-
+		tElement removed = heap->S[0];
+		//corrigir o heap após a remoção
+		heap->S[0] = heap->S[heap->numberOfElements-1];
+		(heap->numberOfElements)--;
+		down(heap, 0);
+		return removed;
 
 	}
+	
 
 
 }
@@ -206,8 +220,13 @@ a manutenção da ordem entre os elementos após a atualização
 *************************************************************************/
 void update (MyHeap* heap, int i, int p)
 {
-
-	// INSERIRI CODIGO
+	int old_p = heap->S[i].priority;
+	heap->S[i].priority = p;
+	if(p > old_p)	
+		up(heap, i);
+	else
+		down(heap, i);
+	
 
 }
 
@@ -218,7 +237,11 @@ necessariamente possuem relação de ordem entre os elementos. Esse método
 *************************************************************************/
 void build (MyHeap* heap)
 {
-	// INSERIRI CODIGO
+	int i = dad (heap->numberOfElements-1); //recebe o pai do último elemento
+	for(; i >= 0; i--){ //começa do pai direto das folhas
+		down(heap, i); //tenta trocar
+
+	}
 }
 
 
