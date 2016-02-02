@@ -2,7 +2,7 @@
 
 int main ()
 {
-	MyHeap* heap;
+	/*MyHeap* heap;
 	heap = create (100); // cria um heap com 100 elementos
 
 	tElement el;
@@ -18,14 +18,14 @@ int main ()
 	el.priority = 10;
 	add(heap,el);
 	print (heap);
-	
+
 	el.priority = 6;
 	add(heap,el);
-	print (heap);	
+	print (heap);
 
 	el.priority = 5;
 	add(heap,el);
-	print (heap);	
+	print (heap);
 
 	el.priority = 50;
 	add(heap,el);
@@ -52,8 +52,8 @@ int main ()
 	print (heap);
 	update (heap, 2, 0);
 	print (heap);
-	
-	destroy(heap);
+
+	destroy(heap);*/
 
 	// teste da função build
 	MyHeap *newHeap = create(10);
@@ -70,10 +70,10 @@ int main ()
 	newHeap->S[9].priority = 4;
 
 	newHeap->numberOfElements = 10;
-	build(newHeap);
-	print(newHeap);
-	destroy(newHeap);
-	
+	print (newHeap);
+	heap_sort(newHeap);
+	print (newHeap);
+
 
 	return 0;
 }

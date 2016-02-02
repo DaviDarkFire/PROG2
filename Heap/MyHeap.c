@@ -1,6 +1,6 @@
 #include "MyHeap.h"
 
-/************************************************************************ 
+/************************************************************************
 Função de Tratamento de exceção
 *************************************************************************/
 void exception(int exceptionError)
@@ -8,7 +8,7 @@ void exception(int exceptionError)
 
 	switch(exceptionError)
 	{
-		case ALLOC_ERROR: 	
+		case ALLOC_ERROR:
 				printf("\nALLOC ERROR");
 				exit(1);
 		case OVERFLOW_WARNING:
@@ -26,7 +26,7 @@ void exception(int exceptionError)
 	}
 }
 
-/************************************************************************ 
+/************************************************************************
 Função para criação do heap
 *************************************************************************/
 MyHeap* create (int capacity)
@@ -44,16 +44,16 @@ MyHeap* create (int capacity)
 }
 
 
-/************************************************************************ 
+/************************************************************************
 Função para liberar memória alocada previamento para o heap
 *************************************************************************/
 void destroy (MyHeap* heap)
 {
-	if (heap->S != NULL) free(heap->S);	
+	if (heap->S != NULL) free(heap->S);
 	if (heap!=NULL) free(heap);
 }
 
-/************************************************************************ 
+/************************************************************************
 Função de impressão do heap
 *************************************************************************/
 void print (MyHeap* heap)
@@ -67,7 +67,7 @@ void print (MyHeap* heap)
 }
 
 
-/************************************************************************ 
+/************************************************************************
 Função de impressão de um elemento do heap
 *************************************************************************/
 void printElement (tElement s)
@@ -78,7 +78,7 @@ void printElement (tElement s)
 }
 
 
-/************************************************************************ 
+/************************************************************************
 Função para retornar o indice do pai do elemento de indice i do heap
 *************************************************************************/
 int dad (int i)
@@ -86,22 +86,22 @@ int dad (int i)
 	if (i==0) return 0;
 	return (i-1)/2;
 }
-/************************************************************************ 
+/************************************************************************
 Função para retornar o indice do filho esquerdo do elemento de indice i
 *************************************************************************/
 int left (int i)
-{	
+{
 	return 2*i + 1;
 }
-/************************************************************************ 
+/************************************************************************
 Função para retornar o indice do filho direito do elemento de indice i
 *************************************************************************/
 int right (int i)
 {
 	return 2*i + 2;
 }
-/************************************************************************ 
-Função para descer o elemento de indice i até sua posição correta com 
+/************************************************************************
+Função para descer o elemento de indice i até sua posição correta com
 relação aos seus descendentes
 *************************************************************************/
 void down (MyHeap* heap, int i)
@@ -115,11 +115,11 @@ void down (MyHeap* heap, int i)
 				exchange (heap, i, maior);
 				down (heap, maior);
 				return;
-			}	
+			}
 }
 
-/************************************************************************ 
-Função para subir o elemento de indice i até sua posição correta com 
+/************************************************************************
+Função para subir o elemento de indice i até sua posição correta com
 relação aos seus ascendentes
 *************************************************************************/
 void up (MyHeap* heap, int i)
@@ -128,9 +128,9 @@ void up (MyHeap* heap, int i)
 	if (i<(heap->numberOfElements))
 	{
 		k = dad(i);
-		if (i==k) return; // chegou na raiz		
-		
-		if ((heap->S[i]).priority > (heap->S[k]).priority) 
+		if (i==k) return; // chegou na raiz
+
+		if ((heap->S[i]).priority > (heap->S[k]).priority)
 		{
 			exchange (heap,i,k);
 			up (heap,k);
@@ -139,7 +139,7 @@ void up (MyHeap* heap, int i)
 	return;
 }
 
-/************************************************************************ 
+/************************************************************************
 Função para trocar a posição de dois elementos do heap
 *************************************************************************/
 void exchange (MyHeap* heap, int i, int k)
@@ -150,9 +150,9 @@ void exchange (MyHeap* heap, int i, int k)
 
 }
 
-/************************************************************************ 
+/************************************************************************
 Função que retorna o indice do maior elemento entre o elemento de indice i
-e seus dois filhos 
+e seus dois filhos
 *************************************************************************/
 int max (MyHeap* heap, int i)
 {
@@ -162,14 +162,14 @@ int max (MyHeap* heap, int i)
 
 	int temp_maior = i; // supondo que o maior é o elemento com indice i
 
- 	// se k é um indice valido e a prioridade do elemento de indice k 
-        // for maior que a prioridade do elemento de indice temp_maior, 
+ 	// se k é um indice valido e a prioridade do elemento de indice k
+        // for maior que a prioridade do elemento de indice temp_maior,
 	// atualiza temp_maior
-	if ((k<heap->numberOfElements) && (heap->S[k].priority > heap->S[temp_maior].priority)) 
+	if ((k<heap->numberOfElements) && (heap->S[k].priority > heap->S[temp_maior].priority))
 		temp_maior = k;
 	// se j é um indice valido e a prioridade do elemento de indice j
-        // for maior que a prioridade do elemento de indice temp_maior, 
-	// atualiza temp_maior	
+        // for maior que a prioridade do elemento de indice temp_maior,
+	// atualiza temp_maior
 	if ((j<heap->numberOfElements) && (heap->S[j].priority > heap->S[temp_maior].priority))
 		temp_maior = j;
 
@@ -177,8 +177,8 @@ int max (MyHeap* heap, int i)
 }
 
 
-/************************************************************************ 
-Função para inserir um novo elemento no Heap com garantia de manutenção da 
+/************************************************************************
+Função para inserir um novo elemento no Heap com garantia de manutenção da
 propriedade de ordem dos elementos do heap após a inserção
 *************************************************************************/
 void add (MyHeap* heap, tElement el)
@@ -188,17 +188,17 @@ void add (MyHeap* heap, tElement el)
 	{
 		heap->S[heap->numberOfElements] = el;
 		heap->numberOfElements = heap->numberOfElements + 1;
-		up(heap,heap->numberOfElements-1); 
+		up(heap,heap->numberOfElements-1);
 	}
 
 }
 
-/************************************************************************ 
+/************************************************************************
 Função para retornar o elemento de maior prioridade no Heap, garantindo
 a manutenção da ordem entre os elementos após a remoção
 *************************************************************************/
 tElement remove_max (MyHeap* heap)
-{	
+{
 	if (heap->numberOfElements == 0) exception (UNDERFLOW_WARNING);
 	else
 	{
@@ -210,30 +210,30 @@ tElement remove_max (MyHeap* heap)
 		return removed;
 
 	}
-	
+
 
 
 }
-/************************************************************************ 
-Função atualizar a prioridade do elemento de indice i do heap, garantindo 
+/************************************************************************
+Função atualizar a prioridade do elemento de indice i do heap, garantindo
 a manutenção da ordem entre os elementos após a atualização
 *************************************************************************/
 void update (MyHeap* heap, int i, int p)
 {
 	int old_p = heap->S[i].priority;
 	heap->S[i].priority = p;
-	if(p > old_p)	
+	if(p > old_p)
 		up(heap, i);
 	else
 		down(heap, i);
-	
+
 
 }
 
-/************************************************************************ 
+/************************************************************************
 Função para construir um heap a partir de um conjunto de elementos que não
-necessariamente possuem relação de ordem entre os elementos. Esse método 
-é baseado em uma sequencia de descidas (chamadas do método down). 
+necessariamente possuem relação de ordem entre os elementos. Esse método
+é baseado em uma sequencia de descidas (chamadas do método down).
 *************************************************************************/
 void build (MyHeap* heap)
 {
@@ -244,6 +244,17 @@ void build (MyHeap* heap)
 	}
 }
 
-
-
-
+void heap_sort(MyHeap *heap){
+	int n;
+	n = heap->numberOfElements; //recebe o número de elementos
+	build(heap); //transforma a sequencia passada em heaps
+	for(int i = n-1; i > 0; i--){ //for começando da última folha
+		exchange(heap, 0, i); //troca essa última folha com a raíz de todo o heap,
+		(heap->numberOfElements)--; //pois ele é o maior, logo a última posição ja está ordenada
+		down(heap, 0); //trava a última pos. ja ordenada
+		//chama a down pra posição zero pra arrumar o heap se for preciso, afinal
+		//o único número que tem-se certeza de sua magnitude é a raíz
+		//complexidade O(nlog)
+	}
+	heap->numberOfElements = n;
+}
