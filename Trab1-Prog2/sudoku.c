@@ -1,6 +1,6 @@
 #include <stdio.h> //inclui as funções de entrada e saída básicos necessários para o desenvolvimento deste trabalho
 #include <math.h>  //inclui funções matemáticas necessárias no desenvolvimento deste software
-#define LC 9 //define o tamanho da matriz, pra um jogo 16x16 alterar o valor 9 por 16
+#define LC 16 //define o tamanho da matriz, pra um jogo 16x16 alterar o valor 9 por 16
 
 //imprime a matriz
 void imprime_jogo(int matriz[LC][LC]){
