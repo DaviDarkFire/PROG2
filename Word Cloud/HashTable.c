@@ -8,6 +8,7 @@
 #define NOT_FOUND_WARNING 2
 #define EMPTY_WARNING 3
 #define PROCCESS_KILL 4
+#define MAX 46
 
 // funcao para tratamento de avisos e erros do programa (exceções)
 void exceptionHT (int error)
@@ -64,23 +65,16 @@ HashTable *createHashTable (int capacity)
 
 void put (HashTable* T, Node* node)
 {
-	int position = hashFunction1 (T,node->value);
+	int position = hashFunction (T,node->word);
 	add (T->data[position], node);
 	(T->numberOfElements)++;
 }
 
-Node* get (HashTable* T, int key)
+Node* search (HashTable* T, char word[MAX]) 
 {
-	int position = hashFunction1 (T,key);
-	Node* node = removeElement (T->data[position], key);
-	if (node) (T->numberOfElements)--;
-	return node;
-}
-Node* search (HashTable* T, int key) 
-{
-	int position = hashFunction1 (T,key);
+	int position = hashFunction (T,word);
 	List* el = T->data[position];
-	return searchList (el, key);
+	return searchList (el, word);
 }
 void printHashTable(HashTable* T)
 {
@@ -99,9 +93,9 @@ void printHashTable(HashTable* T)
 	
 }
 
-int hashFunction1 (HashTable* T, int key)
+int hashFunction (HashTable* T, char word[MAX])
 {
-	return (key%(T->capacity));
+	
 }
 
 

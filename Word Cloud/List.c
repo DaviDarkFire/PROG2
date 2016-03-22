@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "List.h"
+#include <string.h>
 
 #define ALLOC_ERROR 0
 #define UNDERFLOW_WARNING 1
@@ -49,40 +50,25 @@ List* create ()
 }
 
 // Criação de um nó para armazenar um valor inteiro (value)
-Node* createNode(int value)
+Node* createNode(char word[MAX])
 {
 	Node* newNode = (Node*) malloc(sizeof(Node));
-	newNode -> value = value;
+	//newNode -> value = value; ALTERAR
 	newNode -> next = NULL;
 	
 	return newNode;
 }
 
 
-Node* searchList (List* list, int key)
+Node* searchList (List* list, char word[MAX])
 {
 	Node* aux = list->begin;
 
-	while(aux != NULL && aux->value!= key)
+	/*while(aux != NULL && aux->value!= key)
 	{
 		aux = aux->next;
-	}
+	}*/
 	return aux;
-}
-
-// Inserção de um novo nó no início da lista
-// Complexidade: O(1)
-void addBegin(List* list, Node* node)
-{
-	//caso de lista vazia
-	if(isEmpty(list)) list->begin = list->end = node;
-	//caso geral
-	else{
-		node->next = list->begin;
-		list->begin = node;
-	}
-
-	(list->numberOfElements)++;
 }
 
 // Operação padrão de inserção em lista. 
@@ -137,7 +123,7 @@ void printList(List* list)
 // Função de impressão dos campos de um nó
 void printNode(Node* node)
 {
-	if (node) printf("->%d", node->value);
+	if (node) printf("->%s", node->word);
 }
 
 
@@ -160,126 +146,4 @@ void destroy(List* list)
 void destroyNode (Node* node)
 {
 	free (node);
-}
-
-// Remove o primeiro nó da lista simplesmente encadeada
-// Não libera memória ocupada pelo nó (é responsabilidade da função chamadora)
-// Complexidade: O(1)
-Node* removeBegin(List* list)
-{
-	// caso de lista vazia
-	if(isEmpty(list)) 
-	{
-		exception(UNDERFLOW_WARNING);
-		return NULL;
-	}
-
-	// caso exista pelo menos um elemento, o elemento apontado por begin deve ser removido da lista
-	Node* aux = list->begin;
-	list->begin = (list->begin)->next;
-
-	// caso só exista um elemento na lista e ele esteja sendo removido, deve-se atualizar ponteiro end
-	if(list->begin == NULL) list->end = NULL;
-	
-	// atualiza a quantidade de elementos da lista e retorna o ponteiro para o nó removido
-	(list->numberOfElements)--;
-
-	return aux; 
-}
-
-
-// Remove o último nó da lista simplesmente encadeada
-// Não libera memória ocupada pelo nó (é responsabilidade da função chamadora)
-// Complexidade: O(n), pois é necessário percorrer a lista para garantir a atualização do ponteiro "next" do penúltimo nó da lista
-Node* removeEnd(List* list)
-{
-
-	// Caso de lista vazia
-	if(isEmpty(list)) 
-	{
-		exception(UNDERFLOW_WARNING);
-		return NULL;
-	}
-
-	// percorre a lista utilizando dois ponteiros auxiliares
-	Node* aux = NULL;
-	Node* aux1 = list->begin;
-	while(aux1->next != NULL)
-	{
-		aux = aux1;
-		aux1 = aux1->next;
-	}
-
-	// caso em que a lista tem apenas um elemento
-	// deve-se atualizar tanto ponteiro begin quanto ponteiro end 	
-	if(aux==NULL)
-	{
-		list->begin = list->end = NULL;
-	}
-	// caso geral (mais de um nó na lista). 
-	// atualiza-se ponteiro next do penúltimo nó e ponteiro end da lista antes de retornar o nó removido
-	else
-	{
-		aux->next = NULL;
-		list->end = aux;
-	}
-
-	// atualiza a quantidade de elementos e retorna o ponteiro para o nó removido da lista
-	(list->numberOfElements)--;
-	return aux1;
-}
-
-// Remove um elemento da lista especificado por "el"
-// O método deve realizar a busca do elemento. Em caso de sucesso na busca, o elemento deve ser removido.
-// Se houver duplicatas, a primeira ocorrência de "el" na lista será removida. 
-// Não libera memória ocupada pelo nó (é responsabilidade da função chamadora)
-// Complexidade: O(n)
-Node* removeElement(List* list, int el)
-{
-
-	// caso de lista vazia
-	if(isEmpty(list)) 
-	{
-		exception(UNDERFLOW_WARNING);
-		return NULL;
-	}
-
-
-	// busca o elemento na lista
-	Node* aux = NULL;
-	Node* aux1 = list->begin;
-
-	while(aux1!= NULL && aux1->value != el)
-	{
-		aux = aux1;
-		aux1 = aux1->next;
-	}
-
-	// se o elemento não se encontra na lista, o ponteiro aux1 terminará a busca com valor NULL
-	if(aux1==NULL)
-	{
-		exception(NOT_FOUND_WARNING);
-		return NULL;
-	}
-
-	// se o elemento encontrado é o primeiro da lista, o ponteiro aux terminará a busca com valor NULL
-	if(aux==NULL)
-	{
-		list->begin = (list->begin)->next;
-	}
-
-	// caso contrário, o elemento a ser removido está apontado por aux1 e aux aponta para o nó anterior a ele
-	else
-	{
-		aux->next = aux1->next;
-	}
-
-	// caso o nó removido seja o último, deve-se autalizar o ponteiro end da lista
-	if(aux1->next == NULL) list->end = aux;
-
-	// atualiza a quantidade de elementos e retorna o ponteiro para o nó removido
-	(list->numberOfElements)--;
-	return aux1;
-
-	
 }
