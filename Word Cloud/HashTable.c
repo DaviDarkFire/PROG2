@@ -86,16 +86,12 @@ void printHashTable(HashTable* T)
 		printf("\nPosicao %d, endereço da lista = %p.\nElementos:", i, (void*) T->data[i]);
 		List* list = T->data[i];
 		printList (list);
-	}
-
-
-
-	
+	}	
 }
-
 int hashFunction (HashTable* T, char word[MAX])
 {
 	
 }
+
 
 

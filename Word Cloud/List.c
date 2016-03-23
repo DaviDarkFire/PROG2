@@ -71,6 +71,8 @@ Node* searchList (List* list, char word[MAX])
 	return aux;
 }
 
+
+
 // Operação padrão de inserção em lista. 
 // Inserção de um novo nó no final da lista simplesmente encadeada
 // Complexidade: O(1)
