@@ -9,6 +9,7 @@
 #define NOT_FOUND_WARNING 2
 #define EMPTY_LIST_WARNING 3
 #define PROCCESS_KILL 4
+#define MAX 46
 
 
 // funcao para tratamento de avisos e erros do programa (exceções)
@@ -45,7 +46,7 @@ List* create ()
 	newList -> end = NULL;
 	newList -> numberOfElements = 0;
 	if (!newList) exception (ALLOC_ERROR);
-	
+
 	return newList;
 }
 
@@ -53,9 +54,14 @@ List* create ()
 Node* createNode(char word[MAX])
 {
 	Node* newNode = (Node*) malloc(sizeof(Node));
-	//newNode -> value = value; ALTERAR
+	int i = 0;
+	while(word[i] != '\0'){		
+		printf("testeforever\n");
+		newNode->word[i] = word[i];
+	}
+	newNode->quantidade = 1;
 	newNode -> next = NULL;
-	
+
 	return newNode;
 }
 
@@ -64,31 +70,64 @@ Node* searchList (List* list, char word[MAX])
 {
 	Node* aux = list->begin;
 
-	/*while(aux != NULL && aux->value!= key)
+	while(aux != NULL && strcmp(word, aux->word) != 0)
 	{
 		aux = aux->next;
-	}*/
+	}
 	return aux;
 }
 
 
 
-// Operação padrão de inserção em lista. 
-// Inserção de um novo nó no final da lista simplesmente encadeada
-// Complexidade: O(1)
-void add(List* list, Node* node)
+// Operação padrão de inserção ordenada em lista. 
+// Inserção de um novo nó na sua posição correta da lista
+void addSorted(List* list, Node* node)
 {
+	int aux = 1;
 	//caso de lista vazia
-	if(isEmpty(list)) list->begin = list->end = node;
+	if(isEmpty(list)) list->begin = list->end = node;	
+	
 	//caso geral
 	else{
+		Node* nodeAux = list->begin;
+		Node* nodeAux2 = (list->begin)->next;		
+		for (int i = 0; i < list->numberOfElements; i++){
+			printf("teste\n");
+			if(strcmp(node->word, nodeAux->word) == 0){ //comparação pra saber se são iguais
+
+				(nodeAux->quantidade)++;
+				aux = 0;
+
+			}
+
+			if(strcmp(node->word, nodeAux->word) < 0 ){ //comparação pra saber se a palavra passada vem antes que o primeiro item da lista
+
+				node->next = nodeAux;
+				list->begin = node;				
+
+			}			
+			if(strcmp(node->word, nodeAux2->word) < 0 ){ //comparação pra saber se aṕalavra passada vem antes de qualquer outro nó da lista que não seja o inicio
+
+				node->next = nodeAux2;
+				nodeAux->next = node;				
+
+			}			
+			
+			if(nodeAux == list->end && strcmp(node->word, nodeAux->word) > 0){ //comaparação pra saber se a palavra passada vem depois de qualquer nó da lista
+				node->next = NULL;
+				nodeAux->next = node;
+				list->end = node;
+			}else{
+				nodeAux = nodeAux2;
+				nodeAux2 = nodeAux2->next;
+			}		
 		
-		node->next = NULL;
-		(list->end)->next = node;
-		list->end = node;
+		}
 	}
 
-	(list->numberOfElements)++;
+	if(aux){ //se a palavra a ser inserida não existe ainda
+		(list->numberOfElements)++;
+	}	
 }
 
 
@@ -108,9 +147,6 @@ void printList(List* list)
 		return;
 	}	
 
-
-	//printf ("\n\nQuantidade de elementos na lista: %d", list->numberOfElements);
-	//printf ("\nElementos: ");
 	Node* aux = list->begin;
 
 	while(aux != NULL)
@@ -119,13 +155,13 @@ void printList(List* list)
 		
 		aux = aux->next;
 	}
-	//printf("\n");
 }
 
 // Função de impressão dos campos de um nó
 void printNode(Node* node)
 {
-	if (node) printf("->%s", node->word);
+	printf("Palavra %s\n", node->word);
+	printf("Quantidade %d\n", node->quantidade);
 }
 
 
@@ -148,4 +184,18 @@ void destroy(List* list)
 void destroyNode (Node* node)
 {
 	free (node);
+}
+
+char* lowerCase(char*  word){
+
+	int i = 0;
+	while(word[i] != '\0'){
+	
+		if(word[i] < 90){		
+			word[i] = word[i]+32;
+		}
+		i++;
+	}
+	return word;
+
 }

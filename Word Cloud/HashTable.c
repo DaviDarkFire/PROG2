@@ -66,7 +66,7 @@ HashTable *createHashTable (int capacity)
 void put (HashTable* T, Node* node)
 {
 	int position = hashFunction (T,node->word);
-	add (T->data[position], node);
+	addSorted (T->data[position], node);
 	(T->numberOfElements)++;
 }
 
