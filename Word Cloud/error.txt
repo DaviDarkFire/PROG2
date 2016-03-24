@@ -1,0 +1,20 @@
+==12730== Invalid read of size 4
+==12730==    at 0x804873F: put (HashTable.c:68)
+==12730==    by 0x8048BCA: main (wordCloud.c:15)
+==12730==  Address 0x41ae198 is not stack'd, malloc'd or (recently) free'd
+==12730== 
+==12730== Invalid read of size 4
+==12730==    at 0x8048A3B: isEmpty (List.c:122)
+==12730==    by 0x8048A5F: printList (List.c:132)
+==12730==    by 0x8048748: put (HashTable.c:68)
+==12730==    by 0x8048BCA: main (wordCloud.c:15)
+==12730==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==12730== 
+==12730== 
+==12730== Process terminating with default action of signal 11 (SIGSEGV)
+==12730==  Access not within mapped region at address 0x0
+==12730==    at 0x8048A3B: isEmpty (List.c:122)
+==12730==    by 0x8048A5F: printList (List.c:132)
+==12730==    by 0x8048748: put (HashTable.c:68)
+==12730==    by 0x8048BCA: main (wordCloud.c:15)
+Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.Lista Vazia.==12730== 

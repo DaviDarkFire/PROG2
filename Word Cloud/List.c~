@@ -10,6 +10,7 @@
 #define EMPTY_LIST_WARNING 3
 #define PROCCESS_KILL 4
 #define MAX 46
+#define CAPACITY 26
 
 
 // funcao para tratamento de avisos e erros do programa (exceções)
@@ -81,8 +82,10 @@ Node* searchList (List* list, char word[MAX])
 
 
 // Operação padrão de inserção ordenada em lista. 
-void addSorted(List* list, Node* node)
-{	
+void addSorted(List* list, Node* node){	
+
+	lowerCase(node->word);//copia para o nó que o usuário digitou uma versão de seu valor com as letras em caixa baixa	
+	
 	Node* inicio = list->begin; //começa o ponteiro no começo da lista
 	Node* anterior = NULL; //começa o ponteiro uma posição antes do começo da lista, neste caso no NULL
 			
@@ -117,7 +120,10 @@ void addSorted(List* list, Node* node)
 // Retorna TRUE se a lista é vazia e FALSE caso contrário
 bool isEmpty(List* list)
 {
-	return (list->begin == NULL);
+	if(list->begin == NULL)
+		return 1;
+	else
+		return 0;	
 }
 
 // Função para impressão da lista
@@ -143,8 +149,7 @@ void printList(List* list)
 // Função de impressão dos campos de um nó
 void printNode(Node* node)
 {
-	printf("Palavra: %s\n", node->word);
-	printf("Quantidade: %d\n", node->quantidade);
+	printf("\n%s %d\n", node->word, node->quantidade);
 }
 
 
@@ -169,7 +174,7 @@ void destroyNode (Node* node)
 	free (node);
 }
 
-char* lowerCase(char*  word){
+void lowerCase(char*  word){
 
 	int i = 0;
 	while(word[i] != '\0'){
@@ -179,6 +184,4 @@ char* lowerCase(char*  word){
 		}
 		i++;
 	}
-	return word;
-
 }
