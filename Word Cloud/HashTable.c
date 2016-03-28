@@ -93,7 +93,7 @@ int hashFunction (HashTable* T, char word[MAX]){
 }
 void destroyHash(HashTable* T){
 	for(int i = 0; i < CAPACITY; i++){
-		printf("testeDestroy\n");
+		printf("\ntesteDestroy\n");
 		destroy(T->data[i]);		
 	}
 }
