@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include "List.h"
 #include <string.h>
@@ -61,6 +60,7 @@ Node* createNode(char word[MAX])
 		newNode->word[i] = word[i];
 		i++;
 	}
+	newNode->word[i] = '\0';
 	newNode->quantidade = 1;
 	newNode -> next = NULL;
 
@@ -86,7 +86,10 @@ void addSorted(List* list, Node* node){
 
 	lowerCase(node->word);//copia para o nó que o usuário digitou uma versão de seu valor com as letras em caixa baixa	
 	
+	
 	Node* inicio = list->begin; //começa o ponteiro no começo da lista
+
+
 	Node* anterior = NULL; //começa o ponteiro uma posição antes do começo da lista, neste caso no NULL
 			
 	while(inicio != NULL && strcmp(node->word, inicio->word) >= 0){ //o loop vai até o fim da lista (NULL) ou até que a palavra de entrada seja maior ou igual que a palavra da posição atual da lista
@@ -118,7 +121,7 @@ void addSorted(List* list, Node* node){
 }
 
 // Retorna TRUE se a lista é vazia e FALSE caso contrário
-bool isEmpty(List* list)
+int isEmpty(List* list)
 {
 	if(list->begin == NULL)
 		return 1;
@@ -183,5 +186,5 @@ void lowerCase(char*  word){
 			word[i] = word[i]+32;
 		}
 		i++;
-	}
+	}	
 }

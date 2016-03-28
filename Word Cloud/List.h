@@ -28,7 +28,7 @@ typedef struct
 List* create ();	
 Node* createNode(char*);	
 void addSorted(List*, Node*);
-bool isEmpty(List*);
+int isEmpty(List*);
 void printList(List*);
 void printNode(Node*);
 void destroy(List*);
