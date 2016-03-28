@@ -36,7 +36,7 @@ void exceptionHT (int error)
 	}
 }
 
-
+//cria a hash
 HashTable *createHashTable (int capacity)
 {
 
@@ -62,20 +62,21 @@ HashTable *createHashTable (int capacity)
 
 }
 
-
+//adiciona um valor na hash
 void put (HashTable* T, Node* node)
 {
 	int position = hashFunction (T,node->word);
 	addSorted (T->data[position], node);
 	(T->numberOfElements)++;
 }
-
+//procura um valor na hash
 Node* search (HashTable* T, char word[MAX]) 
 {
 	int position = hashFunction (T,word);
 	List* el = T->data[position];
 	return searchList (el, word);
 }
+//printa a hash
 void printHashTable(HashTable* T)
 {
 
@@ -88,12 +89,13 @@ void printHashTable(HashTable* T)
 		printList (list);
 	}	
 }
+//retorna a posição a qual o valor passado deve ser inserido
 int hashFunction (HashTable* T, char word[MAX]){	
 	return word[0]-97;		
 }
+//destroy a hash
 void destroyHash(HashTable* T){
-	for(int i = 0; i < CAPACITY; i++){
-		printf("\ntesteDestroy\n");
+	for(int i = 0; i < T->capacity; i++){		
 		destroy(T->data[i]);		
 	}
 }

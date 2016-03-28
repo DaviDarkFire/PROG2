@@ -67,7 +67,7 @@ Node* createNode(char word[MAX])
 	return newNode;
 }
 
-
+//procura na lista o valor passado
 Node* searchList (List* list, char word[MAX])
 {
 	Node* aux = list->begin;
@@ -82,9 +82,7 @@ Node* searchList (List* list, char word[MAX])
 
 
 // Operação padrão de inserção ordenada em lista. 
-void addSorted(List* list, Node* node){	
-
-	//copia para o nó que o usuário digitou uma versão de seu valor com as letras em caixa baixa			
+void addSorted(List* list, Node* node){					
 	
 	Node* inicio = list->begin; //começa o ponteiro no começo da lista
 
@@ -119,7 +117,7 @@ void addSorted(List* list, Node* node){
 	(list->numberOfElements)++;		
 }
 
-// Retorna TRUE se a lista é vazia e FALSE caso contrário
+// Retorna 1 se a lista é vazia e 0 caso contrário
 int isEmpty(List* list)
 {
 	if(list->begin == NULL)
@@ -176,6 +174,7 @@ void destroyNode (Node* node)
 	free (node);
 }
 
+//função que converte as strings passadas para caixa baixa
 void lowerCase(char word[MAX]){
 
 	int i = 0;
