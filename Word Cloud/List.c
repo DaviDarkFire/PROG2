@@ -84,8 +84,7 @@ Node* searchList (List* list, char word[MAX])
 // Operação padrão de inserção ordenada em lista. 
 void addSorted(List* list, Node* node){	
 
-	lowerCase(node->word);//copia para o nó que o usuário digitou uma versão de seu valor com as letras em caixa baixa	
-	
+	//copia para o nó que o usuário digitou uma versão de seu valor com as letras em caixa baixa			
 	
 	Node* inicio = list->begin; //começa o ponteiro no começo da lista
 
@@ -177,7 +176,7 @@ void destroyNode (Node* node)
 	free (node);
 }
 
-void lowerCase(char*  word){
+void lowerCase(char word[MAX]){
 
 	int i = 0;
 	while(word[i] != '\0'){

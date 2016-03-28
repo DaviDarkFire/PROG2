@@ -6,7 +6,7 @@
 
 int main(void){
 
-	FILE* dontCare = fopen("palavrasDontCare.in","r");
+	FILE* dontCare = fopen("caxa.in","r");
 	HashTable* hashDontCare = createHashTable(CAPACITY);
 	char* teste = malloc(46*sizeof(char*));
 
@@ -16,12 +16,20 @@ int main(void){
 	}
 	printHashTable(hashDontCare);*/
 	
-	for(int i = 0; i < 100; i++){
-		fscanf(dontCare, "%s", teste);				
-		Node* node = createNode(teste);
+	for(int i = 0; i < 7; i++){
+		fscanf(dontCare, "%s", teste);	
+
+		lowerCase(teste);	
+
+		printf("%s\n", teste);		
+		
+		Node* node = createNode(teste);		
+		
 		put (hashDontCare, node);		
 	}
 	printHashTable(hashDontCare);
+
+
 	//destroyHash(hashDontCare);
 					
 	/*scanf("%s", teste);
