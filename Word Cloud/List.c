@@ -156,16 +156,17 @@ void printNode(Node* node)
 // Liberação de memória ocupada pela lista simplesmente encadeada
 void destroy(List* list)
 {
-	Node* aux = list->begin;
-	Node* aux1 = aux->next;
-	
-	while(aux1 != list->end)
-	{
-		aux1 = aux;
-		aux = aux->next;
-		destroyNode(aux1);
-	}
+   Node* current = list->begin;
+   Node* next;
 
+   while (current != NULL) 
+   {
+       next = current->next;
+       destroyNode(current);
+       current = next;
+   }
+    
+   list->begin = NULL;
 }
 // Liberação de memória ocupada por um nó da lista
 // Caso existam campos "ponteiros" armazenados no nó, deve-se cuidar para que toda a memória previamente alocada seja liberada 
