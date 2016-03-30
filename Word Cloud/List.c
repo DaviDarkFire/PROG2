@@ -156,9 +156,9 @@ void printNode(Node* node)
 // Liberação de memória ocupada pela lista simplesmente encadeada
 void destroy(List* list)
 {
-	Node* aux1;
 	Node* aux = list->begin;
-
+	Node* aux1 = aux->next;
+	
 	while(aux1 != list->end)
 	{
 		aux1 = aux;
