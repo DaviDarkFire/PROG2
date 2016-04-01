@@ -25,8 +25,8 @@ typedef struct
 
 
 // declaração das funcoes
-List* create ();	
-Node* createNode(char*);	
+List* create ();
+Node* createNode(char*);
 void addSorted(List*, Node*);
 int isEmpty(List*);
 void printList(List*);

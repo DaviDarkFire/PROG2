@@ -31,7 +31,7 @@ void exception (int error)
 			break;
 		case PROCCESS_KILL:
  			printf("Encerrando a execução do programa...\n\n");
-			exit(1);	
+			exit(1);
 		default:
 			printf("Exceção desconhecida! Encerrando a execução do programa...");
 			exit(1);
@@ -55,8 +55,8 @@ Node* createNode(char word[MAX])
 {
 	Node* newNode = (Node*) malloc(sizeof(Node));
 	int i = 0;
-	while(word[i] != '\0'){		
-		
+	while(word[i] != '\0'){
+
 		newNode->word[i] = word[i];
 		i++;
 	}
@@ -70,10 +70,11 @@ Node* createNode(char word[MAX])
 //procura na lista o valor passado
 Node* searchList (List* list, char word[MAX])
 {
+
 	Node* aux = list->begin;
 
-	while(aux != NULL && strcmp(word, aux->word) != 0)
-	{
+	while(aux != NULL && strcmp(word, aux->word) != 0){
+
 		aux = aux->next;
 	}
 	return aux;
@@ -81,40 +82,40 @@ Node* searchList (List* list, char word[MAX])
 
 
 
-// Operação padrão de inserção ordenada em lista. 
-void addSorted(List* list, Node* node){					
-	
+// Operação padrão de inserção ordenada em lista.
+void addSorted(List* list, Node* node){
+
 	Node* inicio = list->begin; //começa o ponteiro no começo da lista
 
 
 	Node* anterior = NULL; //começa o ponteiro uma posição antes do começo da lista, neste caso no NULL
-			
+
 	while(inicio != NULL && strcmp(node->word, inicio->word) >= 0){ //o loop vai até o fim da lista (NULL) ou até que a palavra de entrada seja maior ou igual que a palavra da posição atual da lista
-		
+
 		if(strcmp(node->word, inicio->word) == 0){ //se as palavras forem iguais, não insere nada, apenas se incrementa o contador e sai da função
 			(inicio->quantidade)++;
 			return;
-		
-		}	
+
+		}
 		anterior = inicio; //se não forem iguais, se a palavra de entrada for apenas maior move os 2 ponteiros um nó a frente pra andar na lista
-		inicio = inicio->next;			
+		inicio = inicio->next;
 	}
-			
-	//verificação pra saber se a inserção tem que ser no começo da lista	
-	if(anterior == NULL){ 
-	
+
+	//verificação pra saber se a inserção tem que ser no começo da lista
+	if(anterior == NULL){
+
 		node->next = inicio; //inserção no começo da lista
-		list->begin = node; 
-				
-	//inserção nos demais lugares da lista	
+		list->begin = node;
+
+	//inserção nos demais lugares da lista
 	}else{
-	
+
 		anterior->next = node;
 		node->next = inicio;
-	
-	}	
+
+	}
 	//incremento do número de elementos
-	(list->numberOfElements)++;		
+	(list->numberOfElements)++;
 }
 
 // Retorna 1 se a lista é vazia e 0 caso contrário
@@ -123,7 +124,7 @@ int isEmpty(List* list)
 	if(list->begin == NULL)
 		return 1;
 	else
-		return 0;	
+		return 0;
 }
 
 // Função para impressão da lista
@@ -134,14 +135,14 @@ void printList(List* list)
 	{
 		exception(EMPTY_LIST_WARNING);
 		return;
-	}	
+	}
 
 	Node* aux = list->begin;
 
 	while(aux != NULL)
 	{
 		printNode(aux);
-		
+
 		aux = aux->next;
 	}
 }
@@ -149,7 +150,10 @@ void printList(List* list)
 // Função de impressão dos campos de um nó
 void printNode(Node* node)
 {
-	printf("\n%s %d\n", node->word, node->quantidade);
+	if(node != NULL)
+		printf("\n%s %d\n", node->word, node->quantidade);
+	else
+		printf("\nNenhuma Palavra Encontrada\n");
 }
 
 
@@ -159,17 +163,17 @@ void destroy(List* list)
    Node* current = list->begin;
    Node* next;
 
-   while (current != NULL) 
+   while (current != NULL)
    {
        next = current->next;
        destroyNode(current);
        current = next;
    }
-    
+
    list->begin = NULL;
 }
 // Liberação de memória ocupada por um nó da lista
-// Caso existam campos "ponteiros" armazenados no nó, deve-se cuidar para que toda a memória previamente alocada seja liberada 
+// Caso existam campos "ponteiros" armazenados no nó, deve-se cuidar para que toda a memória previamente alocada seja liberada
 void destroyNode (Node* node)
 {
 	free (node);
@@ -180,10 +184,10 @@ void lowerCase(char word[MAX]){
 
 	int i = 0;
 	while(word[i] != '\0'){
-	
-		if(word[i] < 90){		
+
+		if(word[i] < 90 && word[i] != '-'){
 			word[i] = word[i]+32;
 		}
 		i++;
-	}	
+	}
 }
