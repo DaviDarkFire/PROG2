@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
-#include "Read.h"
+#include "ReadWrite.h"
 
 
 #define CAPACITY 26
@@ -25,10 +25,12 @@ int main(void){
 	/****************************Começa aqui a parte direcionada a leitura do arquivo do qual se quer extrair as palavras****************************/
 	FILE* texto = fopen("texto.in","r"); //cria um ponteiro para o arquivo de texto
 	HashTable* hashTexto = createHashTable(CAPACITY); //cria a hash de palavras dontCare
+	read(texto, hashTexto, hashDontCare);	
+	
+	/****************************Começa aqui a parte direcionada escrita no arquivo látex****************************/
+	FILE* saida = fopen("saida.tex","a");
 
-	read(texto, hashTexto, hashDontCare);
-	
-	
+	write(saida,hashTexto);
 
 	destroyHash(hashTexto); //destroy a hash
 	destroyHash(hashDontCare); //destroy a hash

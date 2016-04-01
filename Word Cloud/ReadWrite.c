@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Read.h"
+#include "ReadWrite.h"
 
 void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 	char* word = malloc(46*sizeof(char*));
@@ -17,8 +17,7 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 		if((letter == 32 || letter == '\n') && aux == 0){
 			word[cont] = '\0';
 			lowerCase(word); //transforma a palavra lida em caixa baixa
-			if(search(hashDontCare,word) == NULL){
-				printf("%s\n", word);
+			if(search(hashDontCare,word) == NULL){				
 				Node* node1 = createNode(word); //cria o nó a ser inserido na lista da hash
 				put (hashTexto, node1); //coloca o nó na hash
 			}
@@ -32,31 +31,10 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 
 
 
+void write(FILE* saida, HashTable* hashTexto){
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
