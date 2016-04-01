@@ -28,10 +28,12 @@ int main(void){
 
 	read(texto, hashTexto, hashDontCare);
 	
-	//printHashTable(hashTexto);
+	
 
 	destroyHash(hashTexto); //destroy a hash
 	destroyHash(hashDontCare); //destroy a hash
+	fclose(dontCare);
+	fclose(texto);
 
 
 	return 0;
