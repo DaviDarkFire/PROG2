@@ -25,13 +25,12 @@ int main(void){
 	/****************************Começa aqui a parte direcionada a leitura do arquivo do qual se quer extrair as palavras****************************/
 	FILE* texto = fopen("texto.in","r"); //cria um ponteiro para o arquivo de texto
 	HashTable* hashTexto = createHashTable(CAPACITY); //cria a hash de palavras dontCare
-	read(texto, hashTexto, hashDontCare);	
-	
+	read(texto, hashTexto, hashDontCare);
+
 	/****************************Começa aqui a parte direcionada escrita no arquivo látex****************************/
-	FILE* saida = fopen("saida.tex","a");
+	FILE* saida = fopen("out.tex","a");
 
 	write(saida,hashTexto);
-
 	destroyHash(hashTexto); //destroy a hash
 	destroyHash(hashDontCare); //destroy a hash
 	fclose(dontCare);
