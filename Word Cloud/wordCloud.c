@@ -29,8 +29,9 @@ int main(void){
 
 	/****************************Começa aqui a parte direcionada escrita no arquivo látex****************************/
 	FILE* saida = fopen("out.tex","a");
-
 	write(saida,hashTexto);
+
+	
 	destroyHash(hashTexto); //destroy a hash
 	destroyHash(hashDontCare); //destroy a hash
 	fclose(dontCare);

@@ -58,7 +58,10 @@ float wordSize(int total, int n){
 void write(FILE* saida, HashTable* hashTexto){
 	float fontSize;
 	int total;
+	int aux;
+	int contador = 0;
 	for(int i = 0; i < CAPACITY; i++){
+
 		if(isEmpty(hashTexto->data[i]) == 0){
 
 			Node* node = hashTexto->data[i]->begin;
@@ -68,44 +71,51 @@ void write(FILE* saida, HashTable* hashTexto){
 				if(node->quantidade > 1){
 					total = importantWordsCount(hashTexto);
 					fontSize = wordSize(total, node->quantidade);
-
-
-					if(fontSize >= 99){
+					aux = 1;
+					contador++;
+					//printf("%f\n", fontSize);
+					if(fontSize >= 99 && aux == 1){
 						fprintf(saida, "{\\Huge {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						aux = 0;
 					}
-					if(fontSize >= 88){
+					if(fontSize >= 88 && aux == 1){
 						fprintf(saida, "{\\huge {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 77){
+					if(fontSize >= 77 && aux == 1){
 						fprintf(saida, "{\\LARGE {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 66){
+					if(fontSize >= 66 && aux == 1){
 						fprintf(saida, "{\\Large {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 55){
+					if(fontSize >= 55 && aux == 1){
 						fprintf(saida, "{\\large {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 44){
+					if(fontSize >= 44 && aux == 1){
 						fprintf(saida, "{\\normalsize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 33){
+					if(fontSize >= 33 && aux == 1){
 						fprintf(saida, "{\\small {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 22){
+					if(fontSize >= 22 && aux == 1){
 						fprintf(saida, "{\\footnotesize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
-
+						aux = 0;
 					}
-					if(fontSize >= 11){
+					if(fontSize >= 11 && aux == 1){
 						fprintf(saida, "{\\scriptsize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						aux = 0;
 					}
-					if(fontSize >= 1){
+					if(fontSize >= 1 && aux == 1){
 						fprintf(saida, "{\\tiny {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+					}
+					if(contador >= 5){
+						fprintf(saida, " \\\\ ");
+						contador = 0;
 					}
 				}
 				node = node->next;
@@ -113,10 +123,10 @@ void write(FILE* saida, HashTable* hashTexto){
 
 		}
 	}
-	fprintf(saida, "\n%s\n", "\\hline");
-	fprintf(saida, "%s\n", "\\end{tabular}");
-	fprintf(saida, "%s\n", "\\end{center}");
-	fprintf(saida, "%s\n", "\\end{document}");
+	fprintf(saida, "\n\\hline\n");
+	fprintf(saida, "\\end{tabular}\n");
+	fprintf(saida, "\\end{center}\n");
+	fprintf(saida, "\\end{document}\n");
 }
 
 
