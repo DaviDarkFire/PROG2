@@ -31,7 +31,7 @@ int main(void){
 	FILE* saida = fopen("out.tex","a");
 	write(saida,hashTexto);
 
-	
+
 	destroyHash(hashTexto); //destroy a hash
 	destroyHash(hashDontCare); //destroy a hash
 	fclose(dontCare);

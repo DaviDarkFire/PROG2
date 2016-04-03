@@ -11,6 +11,7 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 	int aux;
 	while(letter != EOF){
 
+
 		if((letter >= 65 && letter <= 90) || (letter >= 97 && letter <= 122) || letter == 45){
 			word[cont] = letter;
 			aux = 0;
@@ -19,7 +20,7 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 		if((letter == 32 || letter == '\n') && aux == 0){
 			word[cont] = '\0';
 			lowerCase(word); //transforma a palavra lida em caixa baixa
-			if(search(hashDontCare,word) == NULL){
+			if(search(hashDontCare,word) == NULL){				
 				Node* node1 = createNode(word); //cria o nó a ser inserido na lista da hash
 				put (hashTexto, node1); //coloca o nó na hash
 			}
@@ -60,22 +61,28 @@ void write(FILE* saida, HashTable* hashTexto){
 	int total;
 	int aux;
 	int contador = 0;
+	int aux1 = 0; //retirar depois
+	float soma = 0; //retirar depois
 	for(int i = 0; i < CAPACITY; i++){
 
 		if(isEmpty(hashTexto->data[i]) == 0){
 
 			Node* node = hashTexto->data[i]->begin;
 
+			//printf("Fonte: %f Vezes: %d\n", fontSize, node->quantidade);
 			while(node != NULL){
 
 				if(node->quantidade > 1){
-					total = importantWordsCount(hashTexto);
-					fontSize = wordSize(total, node->quantidade);
+					//total = importantWordsCount(hashTexto);
+					//fontSize = wordSize(total, node->quantidade);
 					aux = 1;
 					contador++;
-					//printf("%f\n", fontSize);
+
+					aux1++;
+					soma += node->quantidade;
+					fontSize = (node->quantidade)*11;
 					if(fontSize >= 99 && aux == 1){
-						fprintf(saida, "{\\Huge {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\Huge {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 88 && aux == 1){
@@ -83,7 +90,7 @@ void write(FILE* saida, HashTable* hashTexto){
 						aux = 0;
 					}
 					if(fontSize >= 77 && aux == 1){
-						fprintf(saida, "{\\LARGE {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\LARGE {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 66 && aux == 1){
@@ -91,7 +98,7 @@ void write(FILE* saida, HashTable* hashTexto){
 						aux = 0;
 					}
 					if(fontSize >= 55 && aux == 1){
-						fprintf(saida, "{\\large {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\large {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 44 && aux == 1){
@@ -99,7 +106,8 @@ void write(FILE* saida, HashTable* hashTexto){
 						aux = 0;
 					}
 					if(fontSize >= 33 && aux == 1){
-						fprintf(saida, "{\\small {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\small {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+
 						aux = 0;
 					}
 					if(fontSize >= 22 && aux == 1){
@@ -107,11 +115,11 @@ void write(FILE* saida, HashTable* hashTexto){
 						aux = 0;
 					}
 					if(fontSize >= 11 && aux == 1){
-						fprintf(saida, "{\\scriptsize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\scriptsize {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 1 && aux == 1){
-						fprintf(saida, "{\\tiny {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\tiny {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 					}
 					if(contador >= 5){
 						fprintf(saida, " \\\\ ");
