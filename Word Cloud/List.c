@@ -185,7 +185,7 @@ void lowerCase(char word[MAX]){
 	int i = 0;
 	while(word[i] != '\0'){
 
-		if(word[i] < 90 && word[i] != '-'){
+		if(word[i] <= 90 && word[i] != '-'){
 			word[i] = word[i]+32;
 		}
 		i++;
