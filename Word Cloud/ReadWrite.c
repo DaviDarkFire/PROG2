@@ -19,8 +19,9 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 		}
 		if((letter == 32 || letter == '\n') && aux == 0){
 			word[cont] = '\0';
+
 			lowerCase(word); //transforma a palavra lida em caixa baixa
-			if(search(hashDontCare,word) == NULL){				
+			if(word[0] != '-' && search(hashDontCare,word) == NULL){
 				Node* node1 = createNode(word); //cria o nó a ser inserido na lista da hash
 				put (hashTexto, node1); //coloca o nó na hash
 			}
@@ -32,54 +33,17 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 
 }
 
-int importantWordsCount(HashTable* hashTexto){
-	int count = 0;
-	for(int i = 0; i < CAPACITY; i++){
-		if(isEmpty(hashTexto->data[i]) == 0){
-			Node* node = hashTexto->data[i]->begin;
-			while(node != NULL){
-				if(node->quantidade > 1){
-					count++;
-				}
-				node = node->next;
-			}
-		}
-	}
-	return count;
-
-}
-
-
-
-float wordSize(int total, int n){
-	float n1 = n;
-	float total1 = total;
-	return (n1/total1)*100;
-}
 void write(FILE* saida, HashTable* hashTexto){
-	float fontSize;
-	int total;
+	float fontSize;	
 	int aux;
 	int contador = 0;
-	int aux1 = 0; //retirar depois
-	float soma = 0; //retirar depois
 	for(int i = 0; i < CAPACITY; i++){
-
 		if(isEmpty(hashTexto->data[i]) == 0){
-
 			Node* node = hashTexto->data[i]->begin;
-
-			//printf("Fonte: %f Vezes: %d\n", fontSize, node->quantidade);
 			while(node != NULL){
-
 				if(node->quantidade > 1){
-					//total = importantWordsCount(hashTexto);
-					//fontSize = wordSize(total, node->quantidade);
 					aux = 1;
 					contador++;
-
-					aux1++;
-					soma += node->quantidade;
 					fontSize = (node->quantidade)*11;
 					if(fontSize >= 99 && aux == 1){
 						fprintf(saida, "{\\Huge {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
@@ -131,7 +95,7 @@ void write(FILE* saida, HashTable* hashTexto){
 
 		}
 	}
-	fprintf(saida, "\n\\hline\n");
+	fprintf(saida, "\n \\\\ \\hline\n");
 	fprintf(saida, "\\end{tabular}\n");
 	fprintf(saida, "\\end{center}\n");
 	fprintf(saida, "\\end{document}\n");
