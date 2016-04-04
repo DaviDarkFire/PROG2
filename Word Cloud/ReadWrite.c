@@ -34,7 +34,7 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 }
 
 void write(FILE* saida, HashTable* hashTexto){
-	float fontSize;	
+	float fontSize;
 	int aux;
 	int contador = 0;
 	for(int i = 0; i < CAPACITY; i++){
@@ -46,40 +46,40 @@ void write(FILE* saida, HashTable* hashTexto){
 					contador++;
 					fontSize = (node->quantidade)*11;
 					if(fontSize >= 99 && aux == 1){
-						fprintf(saida, "{\\Huge {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\Huge \\textcolor{AzulEscuro} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 88 && aux == 1){
-						fprintf(saida, "{\\huge {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\huge \\textcolor{Amarelo} {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 77 && aux == 1){
-						fprintf(saida, "{\\LARGE {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\LARGE \\textcolor{Rosa} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 66 && aux == 1){
-						fprintf(saida, "{\\Large {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\Large \\textcolor{VermEscuro} {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 55 && aux == 1){
-						fprintf(saida, "{\\large {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\large \\textcolor{Roxo} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 44 && aux == 1){
-						fprintf(saida, "{\\normalsize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\normalsize \\textcolor{VerdeLocao} {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 33 && aux == 1){
-						fprintf(saida, "{\\small {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\small \\textcolor{Laranja} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 
 						aux = 0;
 					}
 					if(fontSize >= 22 && aux == 1){
-						fprintf(saida, "{\\footnotesize {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\footnotesize \\textcolor{Verde} {%s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 11 && aux == 1){
-						fprintf(saida, "{\\scriptsize {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
+						fprintf(saida, "{\\scriptsize \\textcolor{AzulEscuro} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
 					}
 					if(fontSize >= 1 && aux == 1){
