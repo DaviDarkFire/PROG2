@@ -33,18 +33,38 @@ void read(FILE* texto, HashTable* hashTexto, HashTable* hashDontCare){
 
 }
 
+int contaQuantidade (HashTable* hashTexto, int quantidade){
+	int cont = 0;
+	for(int i = 0; i < CAPACITY; i++){
+
+		Node* aux = hashTexto->data[i]->begin;
+
+		while(aux != NULL){			
+			if(aux->quantidade >= quantidade){
+				cont++;				
+			}	
+			aux = aux->next;
+		}		
+	}	
+	return cont;
+}
+
 void write(FILE* saida, HashTable* hashTexto){
 	float fontSize;
 	int aux;
 	int contador = 0;
+	int j = 1;
+	while(contaQuantidade (hashTexto, j) > 140){
+		j++;
+	}
 	for(int i = 0; i < CAPACITY; i++){
 		if(isEmpty(hashTexto->data[i]) == 0){
 			Node* node = hashTexto->data[i]->begin;
-			while(node != NULL){
-				if(node->quantidade > 1){
+			while(node != NULL){				
+				if(node->quantidade > j){
 					aux = 1;
 					contador++;
-					fontSize = (node->quantidade)*11;
+					fontSize = (node->quantidade)*11;					
 					if(fontSize >= 99 && aux == 1){
 						fprintf(saida, "{\\Huge \\textcolor{AzulEscuro} {\\bf %s}} \\footnotesize{(%d)} ",node->word, node->quantidade);
 						aux = 0;
