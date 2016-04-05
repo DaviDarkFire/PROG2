@@ -6,9 +6,9 @@
 
 #define CAPACITY 26
 
-int main(void){
+int main(int argc, char *argv[]){
 	/****************************Começa aqui a parte direcionada a leitura do arquivo do qual se quer extrair as palavras DontCare****************************/
-	FILE* dontCare = fopen("palavrasDontCare.in","r"); //cria um ponteiro para o arquivo de palavras dontCare
+	FILE* dontCare = fopen(argv[1],"r"); //cria um ponteiro para o arquivo de palavras dontCare	
 	HashTable* hashDontCare = createHashTable(CAPACITY); //cria a hash de palavras dontCare
 	char* dontCareWord = malloc(46*sizeof(char*));
 
@@ -23,7 +23,7 @@ int main(void){
 	}
 
 	/****************************Começa aqui a parte direcionada a leitura do arquivo do qual se quer extrair as palavras****************************/
-	FILE* texto = fopen("texto.in","r"); //cria um ponteiro para o arquivo de texto
+	FILE* texto = fopen(argv[2],"r"); //cria um ponteiro para o arquivo de texto
 	HashTable* hashTexto = createHashTable(CAPACITY); //cria a hash de palavras dontCare
 	read(texto, hashTexto, hashDontCare);
 
