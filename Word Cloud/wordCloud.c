@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]){
 	/****************************Começa aqui a parte direcionada a leitura do arquivo do qual se quer extrair as palavras DontCare****************************/
-	FILE* dontCare = fopen(argv[1],"r"); //cria um ponteiro para o arquivo de palavras dontCare	
+	FILE* dontCare = fopen(argv[1],"r"); //cria um ponteiro para o arquivo de palavras dontCare
 	HashTable* hashDontCare = createHashTable(CAPACITY); //cria a hash de palavras dontCare
 	char* dontCareWord = malloc(46*sizeof(char*));
 
@@ -28,8 +28,10 @@ int main(int argc, char *argv[]){
 	read(texto, hashTexto, hashDontCare);
 
 	/****************************Começa aqui a parte direcionada escrita no arquivo látex****************************/
-	FILE* saida = fopen("out.tex","a");
-	write(saida,hashTexto);
+	FILE* saida = fopen("out.tex","w");	
+	FILE* saidaHTML = fopen("out.html","w");
+	write(saida, saidaHTML,hashTexto);
+	
 
 
 	destroyHash(hashTexto); //destroy a hash
