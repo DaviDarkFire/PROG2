@@ -7,8 +7,8 @@
 #define NOT_FOUND_WARNING 2
 #define EMPTY_WARNING 3
 #define PROCCESS_KILL 4
-#define MAX 46
-#define CAPACITY 26
+#define MAX 46 //máximo de letras de uma palavra
+#define CAPACITY 26 //quantos elementos tem a hash
 
 // funcao para tratamento de avisos e erros do programa (exceções)
 void exceptionHT (int error)
@@ -90,8 +90,8 @@ void printHashTable(HashTable* T)
 	}	
 }
 //retorna a posição a qual o valor passado deve ser inserido
-int hashFunction (HashTable* T, char word[MAX]){	
-	return word[0]-97;		
+int hashFunction (HashTable* T, char word[MAX]){ //usando os códigos da tabela ascii, essa conta gera valores de 0 a 25	
+	return word[0]-97;                          //guardando em cada posição uma letra diferente, 0 = a, 1 = b, 2 = c, ... 25 = z		
 }
 //destroy a hash
 void destroyHash(HashTable* T){

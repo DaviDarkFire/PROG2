@@ -8,8 +8,8 @@
 #define NOT_FOUND_WARNING 2
 #define EMPTY_LIST_WARNING 3
 #define PROCCESS_KILL 4
-#define MAX 46
-#define CAPACITY 26
+#define MAX 46 //máximo de letras de uma palavra
+#define CAPACITY 26 //quantidade de posição da hash
 
 
 // funcao para tratamento de avisos e erros do programa (exceções)
@@ -50,21 +50,21 @@ List* create ()
 	return newList;
 }
 
-// Criação de um nó para armazenar um valor inteiro (value)
+// Criação de um nó para armazenar um char*
 Node* createNode(char word[MAX])
 {
 	Node* newNode = (Node*) malloc(sizeof(Node));
 	int i = 0;
-	while(word[i] != '\0'){
+	while(word[i] != '\0'){ //enquanto a palavra a ser colocada no node for diferente de  '\0' copia os elementos pra char* do node
 
 		newNode->word[i] = word[i];
 		i++;
 	}
-	newNode->word[i] = '\0';
-	newNode->quantidade = 1;
-	newNode -> next = NULL;
+	newNode->word[i] = '\0'; //finaliza a char* do node com o \0
+	newNode->quantidade = 1; //como a palavra acabou de ser adicionada sua quantidade é 1
+	newNode -> next = NULL; //faz o ponteiro do próximo receber NULL
 
-	return newNode;
+	return newNode; //retorna o nó criado
 }
 
 //procura na lista o valor passado
@@ -73,8 +73,8 @@ Node* searchList (List* list, char word[MAX])
 
 	Node* aux = list->begin;
 
-	while(aux != NULL && strcmp(word, aux->word) != 0){
-
+	while(aux != NULL && strcmp(word, aux->word) != 0){ //enquanto não estiver no fim da lista ou o valor passado não for encontrado 
+														//continua andando na lista
 		aux = aux->next;
 	}
 	return aux;
@@ -183,8 +183,8 @@ void destroyNode (Node* node)
 void lowerCase(char word[MAX]){
 
 	int i = 0;
-	while(word[i] != '\0'){
-
+	while(word[i] != '\0'){ //enquanto não chegar ao fim da palavra, se ela for maiúscula transforma ela em minúscula, se não for maiúscula 
+							//continua do jeito que está
 		if(word[i] <= 90 && word[i] != '-'){
 			word[i] = word[i]+32;
 		}
